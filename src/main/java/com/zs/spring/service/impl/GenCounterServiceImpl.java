@@ -34,31 +34,31 @@ public class GenCounterServiceImpl implements GenCounterService {
      */
     @Override
     public void genCounter() {
-//        Set<String> counterKeys = stringRedisTemplate.keys(COUNTER_KEY);
-//
-//        for (String key : counterKeys) {
-//            String counterValue = stringRedisTemplate.opsForValue().get(key);
-//            String groupId = key.replace("hub:cache:creditLimit:counter:", "");
-//            String[] groupIdArr = groupId.split(":");
-//            String dpGroupId = groupIdArr[0];
-//            List<String> dpGroupNames = counterMapper.findGroupNameById(dpGroupId);
-//            String cpGroupId = "";
-//            String cpGroupName = "";
-//            if (groupIdArr.length > 1) {
-//                cpGroupId = groupIdArr[1];
-//                cpGroupName = counterMapper.findGroupNameById(cpGroupId).get(0);
-//            }
-//            String groupIds = "";
-//            String groupNames = "";
-//            if (!cpGroupId.equals("")) {
-//                groupIds = dpGroupId + ":" + cpGroupId;
-//                groupNames = dpGroupNames.get(0) + ":" + cpGroupName;
-//            }
-//
-//            counterMapper.insertCounter(groupIds, groupNames, counterValue);
-//
-////            throw new RuntimeException();
-//        }
-//        logger.info("生成{}条数据", counterKeys.size());
+        Set<String> counterKeys = stringRedisTemplate.keys(COUNTER_KEY);
+
+        for (String key : counterKeys) {
+            String counterValue = stringRedisTemplate.opsForValue().get(key);
+            String groupId = key.replace("hub:cache:creditLimit:counter:", "");
+            String[] groupIdArr = groupId.split(":");
+            String dpGroupId = groupIdArr[0];
+            List<String> dpGroupNames = counterMapper.findGroupNameById(dpGroupId);
+            String cpGroupId = "";
+            String cpGroupName = "";
+            if (groupIdArr.length > 1) {
+                cpGroupId = groupIdArr[1];
+                cpGroupName = counterMapper.findGroupNameById(cpGroupId).get(0);
+            }
+            String groupIds = "";
+            String groupNames = "";
+            if (!cpGroupId.equals("")) {
+                groupIds = dpGroupId + ":" + cpGroupId;
+                groupNames = dpGroupNames.get(0) + ":" + cpGroupName;
+            }
+
+            counterMapper.insertCounter(groupIds, groupNames, counterValue);
+
+//            throw new RuntimeException();
+        }
+        logger.info("生成{}条数据", counterKeys.size());
     }
 }
