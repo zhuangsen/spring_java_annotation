@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Import;
  * @description:
  */
 @Configuration
-@Import({RedisTemplateConfig.class, DataSourceConfig.class})
+@Import({DataSourceConfig.class, ScheduleConfig.class, RedissonConfig.class})
 public class AppConfig {
 
 
