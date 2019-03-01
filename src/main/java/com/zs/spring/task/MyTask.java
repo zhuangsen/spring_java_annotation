@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @date: 2019-02-28 16:03
  * @description:
  */
-//@Component
+@Component
 //@EnableScheduling
 //@Lazy(value = false)
 public class MyTask {
