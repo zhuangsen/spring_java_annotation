@@ -1,5 +1,6 @@
 package com.zs.spring.config;
 
+import com.zs.spring.config.rabbitmq.RabbitConfig;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -9,7 +10,7 @@ import org.springframework.context.annotation.Import;
  * @description:
  */
 @Configuration
-@Import({RedisTemplateConfig.class, HikariDataSourceConfig.class, ScheduleConfig.class})
+@Import({RabbitConfig.class})
 public class AppConfig {
 
 

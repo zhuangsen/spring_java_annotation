@@ -14,6 +14,7 @@ public class App {
     public static void main(String[] args) {
         // 通过Java配置来实例化Spring容器
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+//        context.getBean(GenCounterService.class).genCounter();
         context.getBean(GenCounterService.class).genCounter();
 //        context.close();
     }
