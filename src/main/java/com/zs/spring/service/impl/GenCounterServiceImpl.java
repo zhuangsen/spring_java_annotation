@@ -1,7 +1,9 @@
 package com.zs.spring.service.impl;
 
+import com.zs.spring.annoation.DataSource;
 import com.zs.spring.mapper.CounterMapper;
 import com.zs.spring.service.GenCounterService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +20,9 @@ import java.util.Set;
  * @description:
  */
 @Service
+@Slf4j
 @Transactional
 public class GenCounterServiceImpl implements GenCounterService {
-    private static final Logger logger = LoggerFactory.getLogger(GenCounterService.class);
-
     private static final String COUNTER_KEY = "hub:cache:creditLimit:counter:*";
 
     @Autowired
@@ -33,6 +34,7 @@ public class GenCounterServiceImpl implements GenCounterService {
      * 查询redis里面counter数据并插入到表中
      */
     @Override
+    @DataSource(value = "dataSource")
     public void genCounter() {
         Set<String> counterKeys = stringRedisTemplate.keys(COUNTER_KEY);
 
@@ -59,6 +61,6 @@ public class GenCounterServiceImpl implements GenCounterService {
 
 //            throw new RuntimeException();
         }
-        logger.info("生成{}条数据", counterKeys.size());
+        log.info("生成{}条数据", counterKeys.size());
     }
 }

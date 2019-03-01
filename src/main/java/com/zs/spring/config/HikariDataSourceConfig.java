@@ -1,6 +1,7 @@
 package com.zs.spring.config;
 
 import com.zaxxer.hikari.HikariDataSource;
+import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,12 +14,17 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.sql.DataSource;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @auther: madisonzhuang
  * @date: 2019-02-28 17:30
  * @description:
  */
 @Configuration
+@Slf4j
 @ComponentScan("com.zs.spring")
 @PropertySource({"classpath:config.properties"})
 @MapperScan(basePackages = {"com.zs.spring.mapper"})
@@ -41,7 +47,7 @@ public class HikariDataSourceConfig {
      * @date 2018/6/24
      **/
     @Bean
-    public HikariDataSource dataSource() {
+    public HikariDataSource hikariDataSource() {
         HikariDataSource hikariDataSource = new HikariDataSource();
         hikariDataSource.setUsername(user);
         hikariDataSource.setPassword(password);
@@ -66,6 +72,17 @@ public class HikariDataSourceConfig {
 //        sqlSessionFactoryBean.setMapperLocations(classPathResource.getResources("com.zs.spring.mapper"));
 
         return sqlSessionFactoryBean;
+    }
+
+    @Bean
+    public DynamicDataSource dynamicDataSource(HikariDataSource hikariDataSource){
+        log.info("=========dynamicDataSource========");
+        DynamicDataSource dynamicDataSource = new DynamicDataSource();
+        Map dataSourceMap = new HashMap<>();
+        dataSourceMap.put("dataSource",hikariDataSource);
+        dynamicDataSource.setTargetDataSources(dataSourceMap);
+        dynamicDataSource.setDefaultTargetDataSource(hikariDataSource);
+        return dynamicDataSource;
     }
 
     /**

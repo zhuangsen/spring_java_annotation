@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Sets;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,10 +30,9 @@ import redis.clients.jedis.JedisPoolConfig;
 import java.util.Set;
 
 @Configuration
+@Slf4j
 @PropertySource(value = "classpath:config.properties",encoding = "UTF-8")
 public class RedisTemplateConfig {
-
-    private Logger logger = LoggerFactory.getLogger(RedisTemplateConfig.class);
 
     @Autowired
     private Environment environment;
@@ -54,7 +54,7 @@ public class RedisTemplateConfig {
 
     @Bean
     public JedisPoolConfig jedisPoolConfig(){
-        logger.info("初始化redisPoolConfig.................");
+        log.info("初始化redisPoolConfig.................");
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setMaxTotal(maxTotal);
         jedisPoolConfig.setMaxIdle(maxIdle);
@@ -67,7 +67,7 @@ public class RedisTemplateConfig {
 
     @Bean
     public RedisSentinelConfiguration redisSentinelConfiguration(){
-        logger.info("初始化redisSentinelConfiguration.................");
+        log.info("初始化redisSentinelConfiguration.................");
         RedisSentinelConfiguration configuration = new RedisSentinelConfiguration();
         configuration.setPassword(password);
         configuration.setDatabase(database);
@@ -83,7 +83,7 @@ public class RedisTemplateConfig {
             Integer port = environment.getProperty("sentinel.port" + i, Integer.class);
             redisNodeSet.add(new RedisNode(host,port));
         }
-        logger.info("一共有"+redisNodeSet.size()+"个哨兵");
+        log.info("一共有"+redisNodeSet.size()+"个哨兵");
         configuration.setSentinels(redisNodeSet);
         configuration.setMaster("mymaster");
 
@@ -92,7 +92,7 @@ public class RedisTemplateConfig {
 
     @Bean
     public JedisConnectionFactory jedisConnectionFactory(JedisPoolConfig poolConfig,RedisSentinelConfiguration sentinelConfig){
-        logger.info("初始化redisConnectionFactory.................");
+        log.info("初始化redisConnectionFactory.................");
         JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory(sentinelConfig, poolConfig);
         return jedisConnectionFactory;
     }

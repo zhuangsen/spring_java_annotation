@@ -24,7 +24,7 @@
         <org.mybatis.generator.version>1.3.7</org.mybatis.generator.version>
 
         <org.aspecj.version>1.9.1</org.aspecj.version>
-        <lombok.version>1.16.18</lombok.version>
+        <lombok.version>1.18.6</lombok.version>
         <easyexcel.version>1.1.1</easyexcel.version>
         <junit.version>4.12</junit.version>
         <logback.version>1.1.2</logback.version>
@@ -56,6 +56,24 @@
             <version>${org.springframework.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.9.2</version>
+        </dependency>
+
+
+        <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
             <version>${org.mybatis.spring.version}</version>
@@ -86,6 +104,12 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.15</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
         </dependency>
 
         <!--logback-->
