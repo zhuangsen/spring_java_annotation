@@ -1,7 +1,9 @@
 package com.zs.spring;
 
+import com.zs.spring.entity.Mail;
 import com.zs.spring.service.GenCounterService;
 import com.zs.spring.config.AppConfig;
+import com.zs.spring.service.Producer;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
@@ -15,7 +17,7 @@ public class App {
         // 通过Java配置来实例化Spring容器
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 //        context.getBean(GenCounterService.class).genCounter();
-        context.getBean(GenCounterService.class).genCounter();
+//        context.getBean(Producer.class);
 //        context.close();
     }
 }

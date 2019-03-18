@@ -1,6 +1,10 @@
 package com.zs.spring.task;
 
 import com.zs.spring.config.RedisTemplateConfig;
+import com.zs.spring.entity.Mail;
+import com.zs.spring.service.Producer;
+import com.zs.spring.service.Publisher;
+import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
 import org.slf4j.Logger;
@@ -16,23 +20,42 @@ import org.springframework.stereotype.Component;
  * @date: 2019-02-28 16:03
  * @description:
  */
+@Slf4j
 @Component
-//@EnableScheduling
-//@Lazy(value = false)
+@EnableScheduling
+@Lazy(value = false)
 public class MyTask {
 
-    private Logger logger = LoggerFactory.getLogger(MyTask.class);
+//    @Autowired
+//    private RedissonClient redissonClient;
 
     @Autowired
-    private RedissonClient redissonClient;
+    private Producer producer;
+    @Autowired
+    private Publisher publisher;
 
-    @Scheduled(cron = "*/5 * * * * ?")//每隔5秒执行一次
-    public void test() throws Exception {
-        logger.info("Test is working......");
 
-        RBucket<Integer> result = redissonClient.getBucket("hub:cache:creditLimit:counter:GRP20180927164605");
-        Integer s = result.get();
-        logger.info("redisson result : {}", s);
+//    @Scheduled(cron = "*/5 * * * * ?")//每隔5秒执行一次
+//    public void test() throws Exception {
+//        logger.info("Test is working......");
+//
+//        RBucket<Integer> result = redissonClient.getBucket("hub:cache:creditLimit:counter:GRP20180927164605");
+//        Integer s = result.get();
+//        logger.info("redisson result : {}", s);
+//    }
+
+    @Scheduled(cron = "*/5 * * * * ?")
+    public void send(){
+        log.info("rabbitmq is sending......");
+        producer.sendMail("myqueue",new Mail("1","2",2));
+        log.info("rabbitmq is end......");
+    }
+
+    @Scheduled(cron = "*/10 * * * * ?")
+    public void publisher(){
+        log.info("publisher is sending......");
+        publisher.publishMail(new Mail("publishMail","4",6));
+        log.info("publisher is end......");
     }
 
 

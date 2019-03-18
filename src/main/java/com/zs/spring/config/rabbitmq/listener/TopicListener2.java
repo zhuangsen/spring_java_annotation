@@ -1,9 +1,8 @@
 package com.zs.spring.config.rabbitmq.listener;
 
+import com.zs.spring.entity.Mail;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
-import po.Mail;
-
 import java.io.IOException;
 
 

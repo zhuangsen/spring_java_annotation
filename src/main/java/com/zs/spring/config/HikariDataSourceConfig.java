@@ -23,12 +23,12 @@ import java.util.Map;
  * @date: 2019-02-28 17:30
  * @description:
  */
-@Configuration
+//@Configuration
 @Slf4j
-@ComponentScan("com.zs.spring")
-@PropertySource({"classpath:config.properties"})
-@MapperScan(basePackages = {"com.zs.spring.mapper"})
-@EnableTransactionManagement
+//@ComponentScan("com.zs.spring")
+//@PropertySource({"classpath:config.properties"})
+//@MapperScan(basePackages = {"com.zs.spring.mapper"})
+//@EnableTransactionManagement
 public class HikariDataSourceConfig {
     @Value("${jdbc.jdbcUrl}")
     private String url;

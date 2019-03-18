@@ -19,9 +19,9 @@ import java.util.Set;
  * @date: 2019-02-27 17:17
  * @description:
  */
-@Service
+//@Service
 @Slf4j
-@Transactional
+//@Transactional
 public class GenCounterServiceImpl implements GenCounterService {
     private static final String COUNTER_KEY = "hub:cache:creditLimit:counter:*";
 

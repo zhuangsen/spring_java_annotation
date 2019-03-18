@@ -13,7 +13,7 @@ import java.io.IOException;
  * @date: 2019-02-28 16:21
  * @description: 注意：和RedisTemplateConfig一起配置会报错
  */
-@Configuration
+//@Configuration
 public class RedissonConfig {
 
     @Bean

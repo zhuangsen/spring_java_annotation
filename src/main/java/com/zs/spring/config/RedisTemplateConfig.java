@@ -27,9 +27,9 @@ import redis.clients.jedis.JedisPoolConfig;
 
 import java.util.Set;
 
-@Configuration
+//@Configuration
 @Slf4j
-@PropertySource(value = "classpath:config.properties",encoding = "UTF-8")
+//@PropertySource(value = "classpath:config.properties",encoding = "UTF-8")
 public class RedisTemplateConfig {
 
     @Autowired

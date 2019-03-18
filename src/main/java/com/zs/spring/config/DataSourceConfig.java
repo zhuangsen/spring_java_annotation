@@ -17,11 +17,11 @@ import javax.sql.DataSource;
  * @date: 2019-02-28 14:56
  * @description:
  */
-@Configuration
-@ComponentScan("com.zs.spring")
-@PropertySource({"classpath:config.properties"})
-@MapperScan(basePackages = {"com.zs.spring.mapper"})
-@EnableTransactionManagement
+//@Configuration
+//@ComponentScan("com.zs.spring")
+//@PropertySource({"classpath:config.properties"})
+//@MapperScan(basePackages = {"com.zs.spring.mapper"})
+//@EnableTransactionManagement
 public class DataSourceConfig {
     @Value("${jdbc.jdbcUrl}")
     private String url;

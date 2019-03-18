@@ -19,11 +19,11 @@ import java.lang.reflect.Method;
  * @date: 2019-02-28 17:48
  * @description:
  */
-@Component
+//@Component
 @Slf4j
-@Order(1)
-@Aspect
-@EnableAspectJAutoProxy
+//@Order(1)
+//@Aspect
+//@EnableAspectJAutoProxy
 public class DataSourceAspect {
 
     //配置切入点,该方法无方法体,主要为方便同类中其他方法使用此处配置的切入点
